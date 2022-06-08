@@ -1,0 +1,371 @@
+%%%% SemDial Proceedings template by Raquel Fernández, 2013.
+%%%% Modified by Simon Dobnik for the proceedings of IWCS 2019.
+%%%% Modified by Andrew Olney for the proceddings of EDM 2022
+
+%TODO fancy footer https://www.overleaf.com/learn/latex/Headers_and_footers
+
+\documentclass[letterpaper,11pt,oneside]{book} %letterpaper %a4paper
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc} % fonts to encode unicode
+\usepackage{times}
+\usepackage{pdfpages}
+%\usepackage{color}
+%\usepackage{calc}
+\usepackage{url}
+%\usepackage{xcolor}
+\pagestyle{plain}
+
+
+\usepackage[colorlinks,
+%%% EDIT TITLE: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            pdftitle={Proceedings of the 15th International Conference on Educational Data Mining},
+            pdfauthor={International Educational Data Mining Society},
+            %pdfsubject={...},
+            %pdfkeywords={...}
+            linkcolor=blue
+           ]{hyperref}   % hyperlinked table of contents, etc.
+
+\usepackage[bottom=1in,right=1in,left=1in,top=1in]{geometry}
+
+% Textarea
+%\setlength{\textwidth}{17.7cm}
+%\setlength{\textheight}{25cm}
+%\setlength{\oddsidemargin}{-0.6cm}
+%\setlength{\topmargin}{-1.5cm}
+
+\renewcommand{\baselinestretch}{1.1}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newcommand{\putframe}{}
+\newcommand{\draft}{\renewcommand{\putframe}{\noindent\vspace*{-8pt}\textcolor{red}{\hrule height 1mm}
+\vfill\noindent\textcolor{red}{\hrule height 1mm}}}
+
+% Parameters: file name, title, authors, horizontal offset, vertical offset
+\newcommand{\paper}[5]{%
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{\hspace{-17pt}#2}
+\addtocontents{toc}{$\,$\textit{#3}\vspace{5pt}}
+\includepdf[pages=-,offset={#4 #5},pagecommand={\putframe}]{#1}
+\cleardoublepage}
+
+\newcommand{\goodpaper}[3]{\paper{#1}{#2}{#3}{-0mm}{-0mm}}
+
+
+%\draft
+
+
+\begin{document}
+\pagenumbering{roman}
+%%  TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pdfbookmark{Proceedings of the 15th International Conference on Educational Data Mining}{title}
+\thispagestyle{empty}
+
+\begin{center}
+%  \LARGE IWCS 2019 \\
+  \vspace*{55mm}
+    {\bf
+    %\Huge
+    \LARGE
+    % \fontsize{38}{46}\selectfont
+    Proceedings of the 15th International Conference on \\ Educational Data Mining\\
+%    \hspace*{1cm}\\ \hspace*{1cm} \\
+%    \hspace*{1cm} \\ \hspace*{1cm}\\
+%    \hspace*{1cm}\\
+    \vspace{1cm}
+    %\Huge
+    \Large
+    Carol Forsyth \& Stephen Fancsali (eds).
+    % Proceedings of the Conference, Long Papers\\
+    \vspace{5cm}
+    \hspace*{1cm}} \\ % Full Volume
+    %\vspace{75mm}
+%    \vspace{43mm}
+    \LARGE
+    24--27 July, 2022\\
+    University of Durham \\
+    Durham, United Kingdom
+  \end{center}
+  
+% INCLUDE SPONSOR LOGOS HERE.  Upload your images with a template set.
+% Then, for a file called ``logo.png'', you would use a line like the
+% the following:
+%
+% \includegraphics[width=2.5cm]{../templates/logo.png}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[width=4.5cm]{pics/duolingo.png} \quad \includegraphics[width=4.5cm]{pics/ets.png} \quad \includegraphics[width=4.5cm]{pics/durham.png}  %\quad \includegraphics[width=4.5cm]{pics/talkamatic.png} 
+\end{center}
+
+\clearpage
+
+%% DETAILS 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pdfbookmark{ISBN}{isbn}
+\thispagestyle{empty}
+
+%% INCLUDE SPONSOR LOGOS HERE.  Upload your images with a template set.
+%% Then, for a file called ``logo.png'', you would use a line like the
+%% the following:
+%%
+%% \includegraphics[width=2.5cm]{../templates/logo.png}
+%\begin{center}
+%\includegraphics[width=4.5cm]{pics/duolingo.png} \quad \includegraphics[width=4.5cm]{pics/ets.png} \quad \includegraphics[width=4.5cm]{pics/durham.png}  %\quad \includegraphics[width=4.5cm]{pics/talkamatic.png} 
+%\end{center}
+
+%\vspace*{\fill}
+%
+
+%\vspace*{3.5in}
+\large
+\noindent
+\copyright 2022 International Educational Data Mining Society\\
+
+This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.\\
+
+Download copies of this and other EDM proceedings from:
+
+\begin{tabular}{ll}
+\ \ \ \ \ \ & International Educational Data Mining Society (IEDMS)\\
+&{\tt https://educationaldatamining.org}\\
+\end{tabular}\\
+
+%\vspace*{0.6in}
+\vspace*{\fill}
+
+
+\textit{Proceedings of the 15th International Conference on Educational Data Mining: Industry Track}.\\ Carol Forsyth \& Stephen Fancsali (eds).\\ July 24--27, 2022. 
+    Durham, United Kingdom.\\
+\noindent ISBN TODO\\
+%\hspace*{6.5mm} \\
+
+%\vspace*{0.6in}
+%\noindent Order copies of this and other ACL proceedings from: \\
+%\vspace*{3mm}
+%
+%\begin{tabular}{ll}
+%\ \ \ \ \ \ & Association for Computational Linguistics (ACL)\\
+%& 209 N. Eighth Street\\
+%& Stroudsburg, PA 18360\\
+%& USA\\
+%& Tel: +1-570-476-8006\\
+%& Fax: +1-570-476-0860\\
+%&{\tt acl@aclweb.org}\\
+%\end{tabular}
+
+%\vspace*{6mm}
+%\textit{Proceedings of the 15th International Conference on Educational Data Mining: Industry Track}.\\ Carol Forsyth \& Stephen Fancsali (eds).\\ July 24--27, 2022. 
+%    Durham, United Kingdom.\\
+%\noindent ISBN TODO\\
+% This is the ISBN for a main proceedings -- Volume 1.
+% \noindent ISBN 978-1-945626-01-2 (Volume 2)\\
+% This is the ISBN for  main proceedings -- Volume 2.
+% Use the right ISBN for your proceedings
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\pdfbookmark{Preface}{preface}
+
+%\section*{Preface}
+
+\begin{center}
+  {\Large \bf Preface}
+\end{center}
+
+\vspace*{0.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% INSERT YOUR INTRO HERE
+% Welcome to the ACL Workshop on Unresolved Matters. We received
+% 17 submissions, and due to a rigerous review process, we rejected 16. 
+
+Insert preface here 
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\pdfbookmark{Organizing Committee}{pc}
+
+\begin{center}
+  {\Large \bf Organizing Committee}
+\end{center}
+
+\vspace*{0.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Insert organizing committee here
+%\begin{description}
+%% \item{\bf Organizers:}\vspace{2mm} \\
+%% John Doe, Univeristy of Southern Atlantis\\
+%% Jane Example, ACME Research Labs
+%
+%\item{\bf Organisers:}\vspace{2mm} \\
+%  \emph{Local Chairs:} Stergios Chatzikyriakidis and Simon Dobnik \\
+%  \emph{Program Chairs:} Stergios Chatzikyriakidis, Vera Demberg, and Simon Dobnik \\
+%  \emph{Workshops Chair:} Asad Sayeed \\
+%  \emph{Student Track Chairs:} Vlad Maraev and Chatrine Qwaider \\
+%  \emph{Sponsorships Chair:} Staffan Larsson \\
+%  
+%\vspace{3mm}
+%\item{\bf Program Committee:}\vspace{2mm} \\
+%Lasha Abzianidze, Laura Aina, Maxime Amblard, Krasimir Angelov, Emily M. Bender, Raffaella Bernardi, Jean-Philippe   Bernardy , Rasmus Blanck, Gemma   Boleda, Alessandro   Bondielli, Lars   Borin, Johan Bos, Ellen   Breitholtz, Harry Bunt, Aljoscha  Burchardt, Nicoletta Calzolari, Emmanuele Chersoni, Philipp Cimiano, Stephen  Clark, Robin Cooper, Philippe  de Groote, Vera   Demberg, Simon  Dobnik, Devdatt   Dubhashi, Katrin  Erk, Arash   Eshghi, Raquel  Fernández, Jonathan  Ginzburg, Matthew Gotham, Eleni   Gregoromichelaki, Justyna Grudzinska, Gözde Gül Şahin, Iryna  Gurevych , Dag  Haug, Aurelie   Herbelot, Julian  Hough, Christine  Howes, Elisabetta Jezek, Richard  Johansson, Alexandre Kabbach, Lauri  Karttunen, Ruth   Kempson, Mathieu  Lafourcade, Gabriella   Lapesa, Shalom  Lappin, Staffan   Larsson, Gianluca Lebani, Kiyong  Lee, Alessandro   Lenci, Martha   Lewis, Maria Liakata, Sharid   Loáiciga, Zhaohui Luo, Moritz  Maria, Aleksandre Maskharashvili, Stephen   Mcgregor, Louise  McNally, Bruno  Mery, Mehdi  Mirzapour, Richard   Moot, Alessandro  Moschitti, Larry  Moss, Diarmuid  O Seaghdha, Sebastian   Pado, Ludovica  Pannitto, Ivandre Paraboni, Lucia C.   Passaro, Sandro   Pezzelle, Manfred Pinkal, Paul Piwek, Massimo  Poesio, Sylvain   Pogodalla, Christopher  Potts, Stephen  Pulman, Matthew   Purver, James   Pustejovsky, Alessandro   Raganato, Giulia  Rambelli, Allan   Ramsay, Aarne   Ranta, Christian  Retoré, Martin  Riedl, Roland   Roller, Mehrnoosh Sadrzadeh, Asad   Sayeed, Tatjana   Scheffler, Sabine Schulte Im Walde, Marco S. G.   Senaldi, Manfred  Stede, Matthew  Stone, Allan Third, Kees  Van  Deemter, Eva Maria  Vecchi, Carl Vogel, Ivan  Vulić, Bonnie   Webber, Roberto   Zamparelli
+%
+%
+%\vspace{3mm}
+%\item{\bf Invited Speakers:}\vspace{2mm} \\
+%  % James Goodword, Academy of Hysterical Laughter
+%  Mehrnoosh Sadrzadeh, Queen Mary, University of London \\
+%  Ellie Pavlick,  Brown University \\
+%  Raffaella Bernardi, University of Trento
+
+% Panelists
+
+% Invited Paper
+
+%\end{description}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark{Sponsors}{sponsors}
+
+\begin{center}
+  {\Large \bf Sponsors}
+\end{center}
+
+\vspace*{3cm}
+
+\begin{center}
+  {\Large \it Silver}\\
+  \vspace*{0.5cm}
+  \includegraphics[width=4.5cm]{pics/duolingo.png}
+\end{center}
+
+\vspace*{2cm}
+
+\begin{center}
+  {\Large \it Bronze}\\
+  \vspace*{0.4cm}
+  \includegraphics[width=4.5cm]{pics/ets.png} 
+\end{center}
+
+
+%\pdfbookmark{Invited talks}{invited}
+%
+%%\section*{Invited talks}
+%
+%\begin{center}
+%  {\Large \bf Invited Talks}
+%\end{center}
+%
+%\vspace*{0.5cm}
+%
+%\textbf{Mehrnoosh Sadrzadeh: Ellipsis in Compositional Distributional Semantics}
+%
+%Ellipsis is a natural language phenomenon where part of a sentence is missing and its information must be recovered from its surrounding context, as in ``Cats chase dogs and so do foxes.''. Formal semantics offers different methods for resolving ellipsis and recovering the missing information, but the problem has not been considered for distributional semantics, where words have vector embeddings and combinations thereof provide embeddings for sentences. In elliptical sentences these combinations go beyond linear as copying of elided information is necessary. I will talk about recent results in our NAACL 2019 paper, joint with G. Wijnholds, where we develop different models for embedding VP-elliptical sentences using modal sub-exponential categorial grammars. We extend existing verb disambiguation and sentence similarity datasets to ones containing elliptical phrases and evaluate our models on these datasets for a variety of linear and non-linear combinations. Our results show that indeed resolving ellipsis improves the performance of vectors and tensors on these tasks and it also sheds some light on disambiguating their sloppy and strict  readings.
+%
+%\bigskip
+%
+%\textbf{Ellie Pavlick: What Should Constitute Natural Language ``understanding''?}
+%
+%Natural language processing has become indisputably good over the past few years. We can perform retrieval and question answering with purported super-human accuracy, and can generate full documents of text that seem good enough to pass the Turing test. In light of these successes, it is tempting to attribute the empirical performance to a deeper "understanding" of language that the models have acquired. Measuring natural language "understanding", however, is itself an unsolved research problem. In this talk, I will discuss recent work which attempts to illuminate what it is that state-of-the-art models of language are capturing. I will describe approaches which evaluate the models' inferential behaviour, as well as approaches which rely on inspecting the models' internal structure directly. I will conclude with results on human's linguistic inferences, which highlight the challenges involved with developing prescriptivist language tasks for evaluating computational models. 
+%
+%\bigskip
+%
+%\textbf{Raffaella Bernardi: Beyond Task Success: A Closer Look at Jointly Learning to See, Ask,
+%and GuessWhat}
+%
+%The development of conversational agents that ground language into visual information is a challenging problem that requires the integration of dialogue management skills with multimodal understanding. Recently, visual dialogue settings have entered the scene of the Machine Learning and Computer Vision communities thanks to the construction of visually grounded human-human dialogue datasets against which Neural Network models (NNs) have been challenged. I will present our work on GuessWhat?! in which two NN agents interact to each other so that one of the two (the Questioner), by asking questions to the other (the Answerer), can guess which object the Answerer has in mind among all the entities in a given image (GuessWhat?!).  I will present our Questioner model: it encodes both visual and textual inputs, produces a multimodal representation, generates natural language questions, understands the Answerers' responses and guesses the object. I will compare our model's dialogues with models that exploit much more complex learning paradigms, like Reinforcement Learning, showing that more complex machine learning methods do not necessarily correspond to better dialogue quality or even better quantitative performance. The talk is based on work available at \url{https://vista-unitn-uva.github.io/}.
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\pdfbookmark{Table of Contents}{toc}
+\setlength{\parskip}{0pt}
+
+\renewcommand{\contentsname}{\mbox{}\\[-108pt]\noindent\textbf{\Large
+    Table of Contents}\\[-28pt]}
+\tableofcontents
+\cleardoublepage
+
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \pdfbookmark{Invited Talks}{invited}
+% \thispagestyle{empty}
+% \mbox{}\vfill
+% \begin{center}
+% \Huge \bf Invited Talks
+% \end{center}
+% \mbox{}\vfill
+
+% \clearpage
+
+% \addtocontents{toc}{\vspace{10pt} $\,$\textbf{Invited Talks}\vspace{5pt}}
+ 
+
+
+% \pdfbookmark{Full Papers}{papers}
+% \thispagestyle{empty}
+% \mbox{}\vfill
+% \begin{center}
+% \Huge \bf Full Papers
+% \end{center}
+% \mbox{}\vfill
+
+% \clearpage
+
+% \addtocontents{toc}{{}\\[10pt] \textbf{Full Papers}\vspace{5pt}}
+
+
+
+% \pdfbookmark{Poster Abstracts}{posters}
+% \thispagestyle{empty}
+% \mbox{}\vfill
+% \begin{center}
+% \Huge \bf Poster Abstracts
+% \end{center}
+% \mbox{}\vfill
+
+% \clearpage
+
+% \addtocontents{toc}{{}\\[10pt] \textbf{Poster Abstracts}\vspace{5pt}}
+
+% \goodpaper{../pdf/IWCS_2019_paper_1.pdf}{Temporal and Aspectual Entailment}%
+% {Thomas Kober, Sander Bijl de Vroe and Mark Steedman}
+
+% \goodpaper{../pdf/IWCS_2019_paper_3.pdf}{Re-Ranking Words to Improve Interpretability of Automatically Generated Topics}%
+% {Areej Alokaili, Nikolaos Aletras and Mark Stevenson}
+
+\include{all_papers}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+% \clearpage
+% \thispagestyle{empty}
+% \pagecolor{myred}
+% \mbox{}
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

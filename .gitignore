@@ -1,0 +1,20 @@
+.ipynb_checkpoints/
+.vscode/
+junk/
+*.pdf
+*.png
+*.svg
+*.log
+*.aux
+*.out
+*.gz
+*.toc
+proceedings/*
+# These subfolders have their own ignore files, 
+# which allows us to keep folder structure but
+# avoid commuting confidential review information
+# doctoral-consortium/*
+# industry-track/*
+# long-papers/*
+# posters/*
+# short-papers/*
