@@ -1,5 +1,7 @@
 # easy2edm
 
+:warning:This is in progress and not fully functional:warning:
+
 This repo was forked from [easy2acl](https://github.com/acl-org/easy2acl) to better meet the needs of the [International Conference on Educational Data Mining](https://educationaldatamining.org/conferences/).
 
 Major differences:
@@ -37,7 +39,7 @@ The subfolder file structure should look like this:
         |-- ${abbrev}_${year}_paper_2.pdf
         `-- ...
 
-(where ${abbrev} and ${year} are defined in the `meta` file, see below).
+(where `${abbrev}` and `${year}` are defined in the `meta` file, see below).
 
 Perform the following steps to create each subfolder.
 **You must have `track chair` level access to perform all of these steps.**
