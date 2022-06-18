@@ -33,8 +33,6 @@ The subfolder file structure should look like this:
     |-- submission.csv      # (optional) to include abstracts
     |-- accepted            # copied list of accepted papers
     `-- pdf
-        <!-- |-- ${abbrev}_${year}.pdf              # full volume of consolidated PDFs
-        |-- ${abbrev}_${year}_frontmatter.pdf  # front matter of proceedings -->
         |-- ${abbrev}_${year}_paper_1.pdf
         |-- ${abbrev}_${year}_paper_2.pdf
         `-- ...
@@ -75,21 +73,16 @@ Please reorder the entires in `accepted' according to the order you would like t
 
 5. Download abstracts (requires EasyChair Premium)
 
-Go to _Premium -> Track data download -> CSV -> submissions.csv_.
+Go to _Premium -> Track data download -> CSV data, or download only a subset of these tables click here -> submissions.csv_.
 Place this file in the directory as described above.
 If present, the abstracts will be generated into the BibTeX files for ingestion by the Anthology scripts.
 
-##
+## First run of script
 
-
-When you run the script for the first time, create a dummy pdf file for the full volume consolidated PDF file and the front matter proceedings file using the above file naming convention.
+Before you run the script for the first time, create a dummy pdf file for the full volume consolidated PDF file and the front matter proceedings file using the above file naming convention, and put these in the top `pdf` subfolder.
 We will replace the dummy files later and repeat the procedure.
 
-Run the script:
-
-    $ python3 easy2acl.py
-
-When the script has finished, you will see the following additional files in the `proceedings` folder.
+Now run `easy2edm.ipynb`. It will populate the `proceedings` first with accepted pdfs and their bibtex.
 
     |-- proceedings/
         `-- cdrom/
@@ -106,18 +99,25 @@ When the script has finished, you will see the following additional files in the
                 |-- {year}.{abbrev}-{volume}.2.pdf  # second paper
                 `-- ...
 
-This is the input format that [the ingestion scripts for the ACL Anthology](https://github.com/acl-org/ACLPUB) expect.
+## Combined proceedings
 
-The `easyacl.py` script also creates a file `book-proceedings/all_papers.tex` which contains an index of files that is read in automatically by `book-proceedings.tex`.
-This document can be used to generate a full volume consolidated PDF file.
-This file contains front matter (which you should edit), and automatically creates a table of contents and includes all papers from `all_papers.tex`.
-To create the book proceedings simply edit the front matter and recompile `book_proceedings.tex`.
-Copy `book-proceedings.pdf` to `${abbrev}_${year}.pdf` in your `pdf` folder.
-To create `${abbrev}_${year}_frontmatter.pdf` extract the front matter pages with roman page numbers from `book-proceedings.pdf`.
-Finally, re-run `python3 easy2acl.py` to replace the dummy full book proceedings and front matter files in the `proceedings` folder that you will use in the next step.
+It also makes the file `book-proceedings/all_papers.tex` which contains an index of files. This is read in automatically by `book-proceedings.tex` to generate a full volume consolidated PDF file.
 
-Once this data is generated, you can proceed with ACLPUB to generate the XML ingestion file and layout that the Anthology requires.
+You must edit the front matter in `book-proceedings.tex` and then recompile it. During compiling, it automatically creates a table of contents and includes all papers from `all_papers.tex`.
 
+Once it is compiled, you need to copy `book-proceedings.pdf` and extract the frontmatter section to create is bibtex by rerunning the above script.
+
+- Copy `book-proceedings.pdf` to `${abbrev}_${year}.pdf` in your top `pdf` folder.
+- Extract the front matter pages with roman page numbers from `book-proceedings.pdf` and save as `${abbrev}_${year}_frontmatter.pdf` in your top `pdf` folder.
+- Re run the script for generating bibtex
+
+## Citation stamping
+
+To add citation info to the left corner of each page, 
+
+- Generate doi for each submission and insert that into the bibtex
+- Update the ...
+- Run the script
 
 ## Additional information
 
