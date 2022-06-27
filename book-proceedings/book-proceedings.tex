@@ -15,14 +15,24 @@
 %\usepackage{xcolor}
 \pagestyle{plain}
 
+%left align toc
+\usepackage{tocloft}
+\setlength{\cftpartindent}{0em}
+\setlength{\cftchapindent}{0em}
+\setlength{\cftsecindent}{0em}
+\setlength{\cftsubsecindent}{0em}
+\setlength{\cftsubsubsecindent}{0em}
+\setlength{\cftsecnumwidth}{0em}
 
+\usepackage{longtable,booktabs,array}
 \usepackage[colorlinks,
 %%% EDIT TITLE: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             pdftitle={Proceedings of the 15th International Conference on Educational Data Mining},
             pdfauthor={International Educational Data Mining Society},
             %pdfsubject={...},
             %pdfkeywords={...}
-            linkcolor=blue
+            linkcolor=blue,
+            urlcolor=blue,
            ]{hyperref}   % hyperlinked table of contents, etc.
 
 \usepackage[bottom=1in,right=1in,left=1in,top=1in]{geometry}
@@ -45,12 +55,24 @@
 \newcommand{\paper}[5]{%
 \cleardoublepage
 \phantomsection
-\addcontentsline{toc}{section}{\hspace{-17pt}#2}
-\addtocontents{toc}{$\,$\textit{#3}\vspace{5pt}}
+%\addcontentsline{toc}{section}{\hspace{-17pt}#2} 
+\addcontentsline{toc}{section}{#2}
+%\addcontentsline{toc}{section}{\protect\numberline{}#2} %chapter fails unless \par used below
+\addtocontents{toc}{$\,$\textit{#3}\vspace{5pt}\par} %\par} 
 \includepdf[pages=-,offset={#4 #5},pagecommand={\putframe}]{#1}
 \cleardoublepage}
 
 \newcommand{\goodpaper}[3]{\paper{#1}{#2}{#3}{-0mm}{-0mm}}
+
+%pandoc markdown to latex conversion magic (for frontmatter)
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\setlength{\LTleft}{0pt}
+
+%prevent longtables from being added to TOC
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
 
 
 %\draft
@@ -77,13 +99,13 @@
     \vspace{1cm}
     %\Huge
     \Large
-    Carol Forsyth \& Stephen Fancsali (eds).
+    Antonija Mitrovic \& Nigel Bosch (eds).
     % Proceedings of the Conference, Long Papers\\
-    \vspace{5cm}
+    \vspace{3cm} %adjust height based on sponsor logo space
     \hspace*{1cm}} \\ % Full Volume
     %\vspace{75mm}
 %    \vspace{43mm}
-    \LARGE
+    \Large%\LARGE
     24--27 July, 2022\\
     University of Durham \\
     Durham, United Kingdom
@@ -96,7 +118,8 @@
 % \includegraphics[width=2.5cm]{../templates/logo.png}
 \vspace*{\fill}
 \begin{center}
-\includegraphics[width=4.5cm]{pics/duolingo.png} \quad \includegraphics[width=4.5cm]{pics/ets.png} \quad \includegraphics[width=4.5cm]{pics/durham.png}  %\quad \includegraphics[width=4.5cm]{pics/talkamatic.png} 
+\includegraphics[width=4.5cm]{pics/duolingo.png} \quad \includegraphics[width=4.5cm]{pics/ets.png} \quad \includegraphics[width=4.5cm]{pics/durham.png}  \quad 
+\includegraphics[width=4.5cm]{pics/atom.png} 
 \end{center}
 
 \clearpage
@@ -106,69 +129,38 @@
 \pdfbookmark{ISBN}{isbn}
 \thispagestyle{empty}
 
-%% INCLUDE SPONSOR LOGOS HERE.  Upload your images with a template set.
-%% Then, for a file called ``logo.png'', you would use a line like the
-%% the following:
-%%
-%% \includegraphics[width=2.5cm]{../templates/logo.png}
-%\begin{center}
-%\includegraphics[width=4.5cm]{pics/duolingo.png} \quad \includegraphics[width=4.5cm]{pics/ets.png} \quad \includegraphics[width=4.5cm]{pics/durham.png}  %\quad \includegraphics[width=4.5cm]{pics/talkamatic.png} 
-%\end{center}
-
-%\vspace*{\fill}
-%
 
 %\vspace*{3.5in}
 \large
 \noindent
 \copyright 2022 International Educational Data Mining Society\\
 
-This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.\\
+This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-nd/4.0/} or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.\\
 
 Download copies of this and other EDM proceedings from:
 
 \begin{tabular}{ll}
 \ \ \ \ \ \ & International Educational Data Mining Society (IEDMS)\\
-&{\tt https://educationaldatamining.org}\\
+&{\url{https://educationaldatamining.org}}\\
 \end{tabular}\\
 
 %\vspace*{0.6in}
 \vspace*{\fill}
 
 
-\textit{Proceedings of the 15th International Conference on Educational Data Mining: Industry Track}.\\ Carol Forsyth \& Stephen Fancsali (eds).\\ July 24--27, 2022. 
+\textit{Proceedings of the 15th International Conference on Educational Data Mining}.\\ Antonija Mitrovic \& Nigel Bosch (eds).\\ July 24--27, 2022. 
     Durham, United Kingdom.\\
 \noindent ISBN TODO\\
-%\hspace*{6.5mm} \\
-
-%\vspace*{0.6in}
-%\noindent Order copies of this and other ACL proceedings from: \\
-%\vspace*{3mm}
-%
-%\begin{tabular}{ll}
-%\ \ \ \ \ \ & Association for Computational Linguistics (ACL)\\
-%& 209 N. Eighth Street\\
-%& Stroudsburg, PA 18360\\
-%& USA\\
-%& Tel: +1-570-476-8006\\
-%& Fax: +1-570-476-0860\\
-%&{\tt acl@aclweb.org}\\
-%\end{tabular}
-
-%\vspace*{6mm}
-%\textit{Proceedings of the 15th International Conference on Educational Data Mining: Industry Track}.\\ Carol Forsyth \& Stephen Fancsali (eds).\\ July 24--27, 2022. 
-%    Durham, United Kingdom.\\
-%\noindent ISBN TODO\\
-% This is the ISBN for a main proceedings -- Volume 1.
-% \noindent ISBN 978-1-945626-01-2 (Volume 2)\\
-% This is the ISBN for  main proceedings -- Volume 2.
-% Use the right ISBN for your proceedings
-
+%TODO ADD ISBN
 
 \clearpage
 
+\addtocontents{toc}{\vspace{10pt}\textbf{Frontmatter}\vspace{5pt}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\pdfbookmark{Preface}{preface}
+\pdfbookmark{Frontmatter}{front-matter}
+\phantomsection
+\addcontentsline{toc}{section}{Preface} 
 
 %\section*{Preface}
 
@@ -184,13 +176,107 @@ Download copies of this and other EDM proceedings from:
 % Welcome to the ACL Workshop on Unresolved Matters. We received
 % 17 submissions, and due to a rigerous review process, we rejected 16. 
 
-Insert preface here 
+For this 15th iteration of the International Conference on Educational
+Data Mining (EDM 2022), the conference returned to England, this time to
+Durham, with an online hybrid format for virtual participation as well.
+EDM is organized under the auspices of the International Educational
+Data Mining Society. The conference, held July 24th through 27th, 2022,
+follows fourteen previous editions (fully online in 2021 and 2020,
+Montréal 2019, Buffalo 2018, Wuhan 2017, Raleigh 2016, Madrid 2015,
+London 2014, Memphis 2013, Chania 2012, Eindhoven 2011, Pittsburgh 2010,
+Cordoba, 2009 and Montréal 2008).
+
+The theme of this year's conference is Inclusion, Diversity, Equity, and
+Accessibility (IDEA) in EDM Research and Practice. This theme emphasizes
+the importance of considering and broadening who is included -- or not
+included -- in EDM, and why. Furthermore, the theme speaks to the
+importance of IDEA considerations in all stages of the research process,
+from participant recruitment and selection, data collection, methods,
+analysis, results, to the application of research results in the future.
+The conference features three invited talks: Jennifer Hill, Professor of
+Applied Statistics at New York University, USA; René Kizilcec, Assistant
+Professor of Information Science at Cornell University, USA; and Judy
+Robertson, Professor of Digital Learning at the University of Edinburgh,
+Scotland. As in the past few years of EDM, this year's conference also
+includes an invited keynote talk by the 2021 winner of the EDM Test of
+Time Award. The talk is delivered by Tiffany Barnes, Distinguished
+Professor of Computer Science at North Carolina State University, USA.
+
+This year's EDM conference continued the double-blind review process
+that started in 2019. The program committee was once again extended,
+this time using an interest survey process, to better reflect the
+community presenting works and to keep the review load for each member
+manageable. EDM received 90 submissions to the full papers track (10
+pages), of which 26 were accepted (28.9\%), while a further 12 were
+accepted as short papers (6 pages) and 14 as posters (4 pages). There
+were 56 submissions to the short paper track, of which 17 were accepted
+(30.4\%) and a further 20 were accepted as posters. The poster and demo
+track itself accepted 10 contributions out of 20 submissions.
+
+The EDM 2022 conference also held a Journal of Educational Data Mining
+(JEDM) Track that provides researchers a venue to deliver more
+substantial mature work than is possible in a conference proceeding and
+to present their work to a live audience. The papers submitted to this
+track followed the JEDM peer review process. Five papers were submitted
+and two papers are featured in the conference's program.
+
+The main conference invited contributions to an Industry Track in
+addition to the main track. The EDM 2022 Industry Track received six
+submissions of which four were accepted. The EDM conference also
+continues its tradition of providing opportunities for young researchers
+to present their work and receive feedback from their peers and senior
+researchers. The doctoral consortium this year features nine such
+presentations.
+
+In addition to the main program, there are six workshops and tutorials:
+\emph{Causal Inference in Educational Data Mining (Third Annual Half-Day
+Workshop)}, \emph{6th Educational Data Mining in Computer Science
+Education (CSEDM) Workshop}, \emph{FATED 2022: Fairness, Accountability,
+and Transparency in Educational Data}, \emph{The Third Workshop of The
+Learner Data Institute: Big Data, Research Challenges, \& Science
+Convergence in Educational Data Science}, \emph{Rethinking
+Accessibility: Applications in Educational Data Mining}, and
+\emph{Tutorial: Using the Open Science Framework to promote Open Science
+in Education Research}.
+
+We thank the sponsors of EDM 2022 for their generous support: DuoLingo,
+ETS, Durham University Department of Computer Science, and Durham
+University School of Education. We are also thankful to the senior
+program committee and regular program committee members and reviewers,
+without whose expert input this conference would not be possible.
+Finally, we thank the entire organizing team and all authors who
+submitted their work to EDM 2022. And we thank EasyChair for their
+infrastructural support.
+
+\begin{longtable}[]{@{}lll@{}}
+%\toprule
+& & \\
+%\midrule
+\endhead
+\emph{Antonija Mitrovic} & University of Canterbury & Program Chair \\
+\emph{Nigel Bosch} & University of Illinois Urbana--Champaign & Program
+Chair \\
+\emph{Alexandra I. Cristea} & Durham University & General Chair \\
+\emph{Chris Brown} & Durham University & General Chair \\
+%\bottomrule
+\end{longtable}
+\vspace{.5cm}
+\hfill
+\begin{minipage}[t]{0.3\textwidth}
+%\begin{flushright}
+July 23nd, 2022\\
+Durham, England, UK
+%\end{flushright}
+\end{minipage}
+
 
 
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\pdfbookmark{Organizing Committee}{pc}
+%\pdfbookmark{Organizing Committee}{pc}
+\phantomsection
+\addcontentsline{toc}{section}{Organizing Committee} 
 
 \begin{center}
   {\Large \bf Organizing Committee}
@@ -200,7 +286,6 @@ Insert preface here
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Insert organizing committee here
 %\begin{description}
 %% \item{\bf Organizers:}\vspace{2mm} \\
 %% John Doe, Univeristy of Southern Atlantis\\
@@ -231,33 +316,518 @@ Insert organizing committee here
 
 %\end{description}
 
+%\hypertarget{general-chairs}{%
+\subsubsection{General Chairs}%\label{general-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Alexandra I. Cristea (Durham University, UK)
+\item
+  Chris Brown (Durham University, UK)
+\end{itemize}
+
+%\hypertarget{program-chairs}{%
+\subsubsection{Program Chairs}%\label{program-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Antonija Mitrovic (University of Canterbury, NZ)
+\item
+  Nigel Bosch (University of Illinois Urbana--Champaign, US)
+\end{itemize}
+
+%\hypertarget{workshop-tutorial-chairs}{%
+\subsubsection{Workshop \& Tutorial
+Chairs}%\label{workshop-tutorial-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Angela Stewart (Carnegie Mellon University, US)
+\item
+  Steven Bradley (Durham University, UK)
+\end{itemize}
+
+%\hypertarget{industry-track-chairs}{%
+\subsubsection{Industry Track Chairs}%\label{industry-track-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Carol Forsyth (Educational Testing Service, US)
+\item
+  Stephen Fancsali (Carnegie Learning, Inc., US)
+\end{itemize}
+
+%\hypertarget{doctoral-consortium-chairs}{%
+\subsubsection{Doctoral Consortium
+Chairs}%\label{doctoral-consortium-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Neil Heffernan (Worcester Polytechnic Institute, US)
+\item
+  Craig Stewart (Durham University, UK)
+\item
+  Armando Toda (Durham University, UK)
+\item
+  Carol Forsyth (Educational Testing Service, US)
+\end{itemize}
+
+%\hypertarget{jedm-track-chairs}{%
+\subsubsection{JEDM Track Chairs}%\label{jedm-track-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Sharon Hsiao (Santa Clara University, US)
+\item
+  Luc Paquette (University of Illinois Urbana--Champaign, US)
+\end{itemize}
+
+%\hypertarget{poster-demo-track-chairs}{%
+\subsubsection{Poster \& Demo Track
+Chairs}%\label{poster-demo-track-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Frederick Li (Durham University, UK)
+\item
+  Michelle P. Banawan (Arizona State University, US)
+\item
+  Hassan Khosravi (University of Queensland, AU)
+\end{itemize}
+
+%\hypertarget{publicationproceedings-chairs}{%
+\subsubsection{Publication/Proceedings
+Chairs}%\label{publicationproceedings-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Andrew M. Olney (University of Memphis, US)
+\item
+  Tahir Aduragba (Durham University, UK)
+\end{itemize}
+
+%\hypertarget{accessibility-chairs}{%
+\subsubsection{Accessibility Chairs}%\label{accessibility-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  JooYoung Seo (University of Illinois Urbana--Champaign, US)
+\item
+  Paul Salvador Inventado (California State University Fullerton, US)
+\end{itemize}
+
+%\hypertarget{diversity-equity-and-inclusion-chair}{%
+\subsubsection{Diversity, Equity, and Inclusion
+Chair}%\label{diversity-equity-and-inclusion-chair}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Agathe Merceron (Beuth University of Applied Sciences, DE)
+\end{itemize}
+
+%\hypertarget{onlinehybrid-experience-chairs}{%
+\subsubsection{Online/Hybrid Experience
+Chairs}%\label{onlinehybrid-experience-chairs}%}
+
+\begin{itemize}
+\tightlist
+\item
+  LuEttaMae Lawrence (University of California Irvine, US)
+\item
+  Stephen Hutt (University of Pennsylvania, US)
+\end{itemize}
+
+%\hypertarget{publicity-and-sponsorship-chair}{%
+\subsubsection{Publicity and Sponsorship
+Chair}%\label{publicity-and-sponsorship-chair}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Effie Law (Durham University, UK)
+\end{itemize}
+
+%\hypertarget{web-chair}{%
+\subsubsection{Web Chair}%\label{web-chair}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Lei Shi (Durham University, UK)
+\end{itemize}
+
+%\hypertarget{local-organisers}{%
+\subsubsection{Local Organisers}%\label{local-organisers}%}
+
+\begin{itemize}
+\tightlist
+\item
+  Jim Ridgeway
+\item
+  Peter Tymms
+\item
+  Suncica Hadzidedic
+\item
+  Stamos Katsigiannis
+\item
+  Elaine Halliday
+\item
+  Georgina Sales
+\item
+  Judith Williams
+\item
+  Jingyun Wang
+\item
+  Dorothy Monekosso
+\item
+  Nelly Bencomo
+\item
+  Jindi Wang
+\end{itemize}
+
+%\hypertarget{iedms-officers}{%
+\subsubsection{IEDMS Officers}%\label{iedms-officers}%}
+
+\begin{longtable}[]{@{}lll@{}}
+%\toprule
+& & \\
+%\midrule
+\endhead
+Tiffany Barnes, & President & North Carolina State University, USA \\
+Mingyu Feng, & Treasurer & WestEd, USA \\
+%\bottomrule
+\end{longtable}
+
+%\hypertarget{iedms-board-of-directors}{%
+\subsubsection{IEDMS Board of
+Directors}%\label{iedms-board-of-directors}%}
+
+\begin{longtable}[]{@{}ll@{}}
+%\toprule
+& \\
+%\midrule
+\endhead
+Rakesh Agrawal & Data Insights Laboratories, USA \\
+Ryan Baker & University of Pennsylvania, USA \\
+Michel Desmarais & Polytechnique Montréal, Canada \\
+Neil Heffernan & Worcester Polytechnic Institute, USA \\
+Kenneth Koedinger & Carnegie Mellon University, USA \\
+Luc Paquette & University of Illinois Urbana--Champaign, USA \\
+Anna Rafferty & Carleton College, USA \\
+Mykola Pechenizkiy & Eindhoven University of Technology, Netherlands \\
+Kalina Yacef & University of Sydney, Australia \\
+%\bottomrule
+\end{longtable}
+
+%\hypertarget{senior-program-committee}{%
+
+\tocless\subsection{Senior Program Committee}%\label{senior-program-committee}%}
+
+\begin{longtable}[]{@{}ll@{}}
+%\toprule
+& \\
+%\midrule
+\endhead
+Agathe Merceron & Beuth University of Applied Sciences Berlin \\
+Alex Bowers & Columbia University \\
+Andrew Lan & University of Massachusetts at Amherst \\
+Andrew M. Olney & University of Memphis \\
+Anna Rafferty & Carleton College \\
+Caitlin Mills & University of New Hampshire \\
+Collin Lynch & North Carolina State University \\
+Cristobal Romero & Department of Computer Sciences and Numerical
+Analysis \\
+Dragan Gasevic & Monash University \\
+Gautam Biswas & Vanderbilt University \\
+Irena Koprinska & The University of Sydney \\
+James Lester & North Carolina State University \\
+Jesus G. Boticario & UNED \\
+Jill-Jênn Vie & Inria \\
+John Stamper & Carnegie Mellon University \\
+Jonathan Rowe & North Carolina State University \\
+José González-Brenes & Chegg \\
+Justin Reich & Massachusetts Institute of Technology \\
+Kasia Muldner & Carleton University \\
+Kristy Elizabeth Boyer & University of Florida \\
+Luc Paquette & University of Illinois Urbana--Champaign \\
+Martina Rau & University of Wisconsin - Madison \\
+Michel Desmarais & Polytechnique Montréal \\
+Min Chi & BeiKaZhouLi \\
+Mingyu Feng & WestEd \\
+Neil Heffernan & Worcester Polytechnic Institute \\
+Niels Pinkwart & Humboldt-Universität zu Berlin \\
+Noboru Matsuda & North Carolina State University \\
+Philip I. Pavlik Jr. & University of Memphis \\
+Radek Pelánek & Masaryk University Brno \\
+Roger Azevedo & University of Central Florida \\
+Ryan Baker & University of Pennsylvania \\
+Sebastián Ventura & University of Cordoba \\
+Shaghayegh Sahebi & University at Albany - SUNY \\
+Sidney D'Mello & University of Colorado Boulder \\
+Stefan Trausan-Matu & University Politehnica of Bucharest \\
+Stephan Weibelzahl & Private University of Applied Sciences Göttingen \\
+Stephen Fancsali & Carnegie Learning, Inc. \\
+Steven Ritter & Carnegie Learning, Inc. \\
+Vanda Luengo & Sorbonne Université - LIP6 \\
+Vincent Aleven & Carnegie Mellon University \\
+Zach Pardos & University of California, Berkeley \\
+%\bottomrule
+\end{longtable}
+
+%\hypertarget{program-committee}{%
+\tocless\subsection{Program Committee}%\label{program-committee}%}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3636}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6364}}@{}}
+%\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} \\
+%\midrule
+\endhead
+Abhinava Barthakur & University of South Australia \\
+Aditi Mallavarapu & University of Illinois Chicago \\
+Ahmad Mel & Ghent University \\
+Ali Darvishi & The University of Queensland \\
+Amal Zouaq & Polytechnique Montréal \\
+Amelia Zafra Gómez & Department of Computer Sciences and Numerical
+Analysis \\
+Anis Bey & Université Paul Sabatier \\
+Anna Finamore & Universidade Lusófona \\
+Anthony F. Botelho & Worcester Polytechnic Institute \\
+April Murphy & Carnegie Learning, Inc. \\
+Aïcha Bakki & Le Mans University \\
+Beverly Park Woolf & University of Massachusetts at Amherst \\
+Bita Akram & North Carolina State University \\
+Buket Doğan & Marmara Üniversitesi \\
+Carol Forsyth & Educational Testing Service \\
+Chris Piech & Stanford University \\
+Clara Belitz & University of Illinois Urbana--Champaign \\
+Claudia Antunes & Instituto Superior Técnico - Universidade de Lisboa \\
+Costin Badica & University of Craiova \\
+Craig Zilles & University of Illinois Urbana--Champaign \\
+Cynthia D'Angelo & University of Illinois Urbana--Champaign \\
+David Pritchard & Massachusetts Institute of Technology \\
+Destiny Williams-Dobosz & University of Illinois Urbana--Champaign \\
+Diego Zapata-Rivera & Educational Testing Service \\
+Donatella Merlini & Università di Firenze \\
+Ean Teng Khor & Nanyang Technological University \\
+Eliana Scheihing & Universidad Austral de Chile \\
+Ella Haig & School of Computing, University of Portsmouth \\
+Emily Jensen & University of Colorado Boulder \\
+Erik Hemberg & ALFA \\
+Feifei Han & Griffith University \\
+Frank Stinar & University of Illinois Urbana--Champaign \\
+Giora Alexandron & Weizmann Institute of Science \\
+Guanliang Chen & Monash University \\
+Guojing Zhou & University of Colorado Boulder \\
+Hannah Valdiviejas & University of Illinois Urbana--Champaign \\
+Hassan Khosravi & The University of Queensland \\
+Hatim Lahza & The University of Queensland \\
+Howard Everson & SRI International \\
+Ivan Luković & University of Novi Sad \\
+Jeremiah Folsom-Kovarik & Soar Technology, Inc. \\
+Jia Zhu & Florida International University \\
+Jiangang Hao & Educational Testing Service \\
+Jihyun Park & Apple, Inc. \\
+Jina Kang & University of Illinois Urbana--Champaign \\
+JooYoung Seo & University of Illinois Urbana--Champaign \\
+Jose Azevedo & Instituto Politécnico do Porto \\
+José Raúl Romero & University of Cordoba \\
+Joshua Gardner & University of Washington \\
+Juho Leinonen & University of Helsinki \\
+Julien Broisin & University of Toulouse \\
+Julio Guerra & University of Pittsburgh \\
+Jun-Ming Su & National University of Tainan \\
+Keith Brawner & United States Army Research Laboratory \\
+Khushboo Thaker & University of Pittsburgh \\
+Lan Jiang & University of Illinois Urbana--Champaign \\
+Ling Tan & Australian Council for Educational Research \\
+LuEttaMae Lawrence & University of California Irvine \\
+Mar Perez-Sanagustin & Pontificia Universidad Católica de Chile \\
+Marcus Specht & Delft University of Technology \\
+Marian Cristian Mihaescu & University of Craiova \\
+Martin Hlosta & Swiss Distance University of Applied Sciences \\
+Matt Myers & University of Delaware \\
+Mehmet Celepkolu & University of Florida \\
+Michelle Banawan & Arizona State University \\
+Mirko Marras & École Polytechnique Fédérale de Lausanne (EPFL) \\
+Nathan Henderson & North Carolina State University \\
+Nathaniel Blanchard & Colorado State University \\
+Nicholas Diana & Colgate University \\
+Olga C. Santos & aDeNu Research Group (UNED) \\
+Patrick Donnelly & Oregon State University Cascades \\
+Paul Hur & University of Illinois Urbana--Champaign \\
+Paul Salvador Inventado & California State University Fullerton \\
+Paul Stefan Popescu & University of Craiova \\
+Paul Wang & Georgetown University \\
+Paulo Carvalho & Carnegie Mellon University \\
+Pedro Manuel Moreno-Marcos & Universidad Carlos III de Madrid \\
+Phillip Grimaldi & Khan Academy \\
+Prateek Basavaraj & University of Central Florida \\
+Rémi Venant & Le Mans Université - LIUM \\
+Rene Kizilcec & Cornell University \\
+Renza Campagni & Università degli Studi di Firenze \\
+Roger Nkambou & Université du Québec À Montréal (UQAM) \\
+Scott Crossley & Georgia State University \\
+Sébastien Iksal & Université du Mans \\
+Sébastien Lallé & The University of British Columbia \\
+Sergey Sosnovsky & Utrecht University \\
+Shahab Boumi & University of Central Florida \\
+Shalini Pandey & University of Minnesota \\
+Shitian Shen & North Carolina State University \\
+Solmaz Abdi & The University of Queensland \\
+Sotiris Kotsiantis & University of Patras \\
+Spyridon Doukakis & Ionian University \\
+Sreecharan Sankaranarayanan & National Institute of Technology
+Karnataka, Surathkal \\
+Stefan Slater & University of Pennsylvania \\
+Stephen Hutt & University of Pennsylvania \\
+Tanja Käser & École Polytechnique Fédérale de Lausanne (EPFL) \\
+Teresa Ober & University of Notre Dame \\
+Thomas Price & North Carolina State University \\
+Tounwendyam Frédéric Ouedraogo & Université Norbert Zongo \\
+Tuyet-Trinh Vu & Hanoi University of Science and Technology \\
+Vanessa Echeverria & Escuela Superior Politécnica del Litoral \\
+Vasile Rus & The University of Memphis \\
+Victor Menendez-Dominguez & Universidad Autónoma de Yucatán \\
+Violetta Cavalli-Sforza & Al Akhawayn University, Morocco \\
+Vladimir Ivančević & University of Novi Sad \\
+Wenbin Zhang & Carnegie Mellon University \\
+Yang Jiang & Educational Testing Service \\
+Yang Shi & North Carolina State University \\
+Yi-Jung Wu & University of Wisconsin - Madison \\
+Yingbin Zhang & University of Illinois Urbana--Champaign \\
+Yomna M.I. Hassan & Misr International University \\
+Zhuqian Zhou & Teachers College, Columbia University \\
+%\bottomrule
+\end{longtable}
+
+
 
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\pdfbookmark{Sponsors}{sponsors}
+%\pdfbookmark{Sponsors}{sponsors}
+\phantomsection
+\addcontentsline{toc}{section}{Sponsors} 
+
+
 
 \begin{center}
   {\Large \bf Sponsors}
 \end{center}
 
-\vspace*{3cm}
+\vspace*{.5cm}
 
+%\subsubsection{Silver} %too small
 \begin{center}
   {\Large \it Silver}\\
-  \vspace*{0.5cm}
-  \includegraphics[width=4.5cm]{pics/duolingo.png}
+  \vspace*{0.7cm} %adjust based on white space around logo
+  \includegraphics[width=3.5cm]{pics/duolingo.png}
 \end{center}
 
-\vspace*{2cm}
+\vspace*{.5cm}
 
 \begin{center}
   {\Large \it Bronze}\\
-  \vspace*{0.4cm}
-  \includegraphics[width=4.5cm]{pics/ets.png} 
+  \vspace*{0.5cm}%adjust based on white space around logo
+  \includegraphics[width=3.5cm]{pics/ets.png} \\
+  \includegraphics[width=10.5cm]{pics/cs.png} \\
+  \includegraphics[width=7.5cm]{pics/education.png} 
 \end{center}
 
+\begin{center}
+  {\Large \it Contributors}\\
+  \vspace*{0.3cm}%adjust based on white space around logo
+  \includegraphics[width=3.5cm]{pics/atom.png} 
+\end{center}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\pdfbookmark{Best Paper Selection}{bestpaper}
+\phantomsection
+\addcontentsline{toc}{section}{Best Paper Selection} 
+
+\begin{center}
+  {\Large \bf Best Paper Selection}
+\end{center}
+
+\vspace*{.5cm}
+
+The program committee chairs discussed and nominated four full papers
+and four short papers for best paper and best student paper awards,
+based on reviews, review scores, and meta-reviews. The papers and
+reviews (both anonymous) were then sent to a best paper award committee
+who ranked the papers. The highest-ranked paper was awarded the best
+paper award, while the next-highest ranked paper with a student first
+author was awarded the best student paper award.
+
+\hypertarget{best-paper-committee}{%
+\subsubsection{Best paper committee}\label{best-paper-committee}}
+
+\begin{itemize}
+\tightlist
+\item
+  Luc Paquette
+\item
+  Kalina Yacef
+\item
+  Kenneth Koedinger
+\item
+  Anna Rafferty
+\end{itemize}
+
+\hypertarget{best-paper-nominees}{%
+\subsubsection{Best paper nominees}\label{best-paper-nominees}}
+
+(Full) Jiayi Zhang, Juliana Ma. Alexandra L. Andres, Stephen Hutt, Ryan
+S. Baker, Jaclyn Ocumpaugh, Caitlin Mills, Jamiella Brooks, Sheela
+Sethuraman and Tyron Young. \emph{Detecting SMART Model Cognitive
+Operations in Mathematical Problem-Solving Process}
+
+(Full) Vinthuy Phan, Laura Wright and Bridgette Decent. \emph{Addressing
+Competing Objectives in Allocating Funds to Scholarships and Need-based
+Financial Aid}
+
+(Full) Yuyang Nie, Helene Deacon, Alona Fyshe and Carrie Demmans Epp.
+\emph{Predicting Reading Comprehension Scores of Elementary School
+Students}
+
+(Full) Guojing Zhou, Robert Moulder, Chen Sun and Sidney K. D'Mello.
+\emph{Investigating Temporal Dynamics Underlying Successful
+Collaborative Problem Solving Behaviors with Multilevel Vector
+Autoregression}
+
+(Short) Lea Cohausz. \emph{Towards Real Interpretability of Student
+Success Prediction Combining Methods of XAI and Social Science}
+
+(Short) Juan Sanguino, Ruben Manrique, Olga Mariño, Mario Linares and
+Nicolas Cardozo. \emph{Log mining for course recommendation in limited
+information scenarios}
+
+(Short) Zhikai Gao, Bradley Erickson, Yiqiao Xu, Collin Lynch, Sarah
+Heckman and Tiffany Barnes. \emph{Admitting you have a problem is the first
+step: Modeling when and why students seek help in programming
+assignments}
+
+(Short) Anaïs Tack and Chris Piech. \emph{The AI Teacher Test: Measuring
+the Pedagogical Ability of Blender and GPT-3 in Educational Dialogues}
 
 %\pdfbookmark{Invited talks}{invited}
 %
@@ -295,8 +865,19 @@ Insert organizing committee here
 \pdfbookmark{Table of Contents}{toc}
 \setlength{\parskip}{0pt}
 
-\renewcommand{\contentsname}{\mbox{}\\[-108pt]\noindent\textbf{\Large
-    Table of Contents}\\[-28pt]}
+%different strategy needed for TOC section head
+%\begin{center}
+%  {\Large \bf Table of Contents}
+%\end{center}
+%
+%\vspace*{0.5cm}
+
+%\renewcommand{\contentsname}{\mbox{}\\[-108pt]\noindent\textbf{\Large
+%    Table of Contents}\\[-28pt]}
+\renewcommand{\contentsname}{\mbox{}\\[-108pt]\centering\textbf{\Large
+    Table of Contents}\\[-10pt]}%technically we should have more space, but it looks weird if we do
+    
+\cftchapnumwidth=0pt % removes hanging indentation
 \tableofcontents
 \cleardoublepage
 
@@ -312,8 +893,211 @@ Insert organizing committee here
 
 % \clearpage
 
-% \addtocontents{toc}{\vspace{10pt} $\,$\textbf{Invited Talks}\vspace{5pt}}
+\addtocontents{toc}{\vspace{10pt}\textbf{Abstracts}\vspace{5pt}}
+
+\pdfbookmark{Abstracts}{abstracts}
+\phantomsection
+\addcontentsline{toc}{section}{Keynotes} 
+
+%\section*{Invited talks}
+
+\begin{center}
+  {\Large \bf Keynotes}
+\end{center}
+
+\vspace*{0.5cm}
  
+%\hypertarget{keynotes-1}{%
+%\subsection{Keynotes}\label{keynotes-1}}
+
+\hypertarget{deep-down-everyone-wants-to-be-causal-jennifer-hill}{%
+\subsubsection{Deep Down, Everyone Wants to be Causal (Jennifer
+Hill)}\label{deep-down-everyone-wants-to-be-causal-jennifer-hill}}
+
+\emph{Abstract:} Most researchers in the social, behavioral, and health
+sciences are taught to be extremely cautious in making causal claims.
+However, causal inference is a necessary goal in research for addressing
+many of the most pressing questions around policy and practice. In the
+past decade, causal methodologists have increasingly been using and
+touting the benefits of more complicated machine learning algorithms to
+estimate causal effects. These methods can take some of the guesswork
+out of analyses, decrease the opportunity for ``p-hacking,'' and may be
+better suited for more fine-tuned tasks such as identifying varying
+treatment effects and generalizing results from one population to
+another. However, should these more advanced methods change our
+fundamental views about how difficult it is to infer causality? In this
+talk, I will discuss some potential advantages and disadvantages of
+using machine learning for causal inference and emphasize ways that we
+can all be more transparent in our inferences and honest about their
+limitations.
+
+\hypertarget{beyond-algorithmic-fairness-in-education-equitable-and-inclusive-decision-support-systems-renuxe9-kizilcec}{%
+\subsubsection{Beyond Algorithmic Fairness in Education: Equitable and
+Inclusive Decision-Support Systems (René
+Kizilcec)}\label{beyond-algorithmic-fairness-in-education-equitable-and-inclusive-decision-support-systems-renuxe9-kizilcec}}
+
+\emph{Abstract:} Advancing equity and inclusion in schools and
+universities has long been a priority in education research. While
+data-driven predictive models could help improve social injustices in
+education, many studies from other domains suggest instead that these
+models tend to exacerbate existing inequities without added precautions.
+A growing body of research from the educational data mining and
+neighboring communities is beginning to map out where biases are likely
+to occur, what contributes to them, and how to mitigate them. These
+efforts to advance algorithmic fairness are an important research
+direction, but it is critical to also consider how AI systems are used
+in educational contexts to support decisions and judgements. In this
+talk, I will survey research on algorithmic fairness and explore the
+role of human factors in AI systems and their implications for advancing
+equity and inclusion in education.
+
+\hypertarget{no-data-about-me-without-me-including-learners-and-teachers-in-educational-data-mining-judy-robertson}{%
+\subsubsection{No data about me without me: Including Learners and
+Teachers in Educational Data Mining (Judy
+Robertson)}\label{no-data-about-me-without-me-including-learners-and-teachers-in-educational-data-mining-judy-robertson}}
+
+\emph{Abstract:} The conference theme this year emphasises the
+broadening of participation and inclusion in educational data mining; in
+this talk, I will discuss methodologies for including learners and
+teachers throughout the research process. This involves not only
+preventing harm to young learners which might result from insufficient
+care when processing their data but also embracing their participation
+in the design and evaluation of educational data mining technologies. I
+will argue that even young learners can and should be included in the
+analysis and interpretation of data which affects them. I will give
+examples of a project in which children have the role of data activists,
+using classroom sensor data to explore their readiness to learn.
+
+\hypertarget{test-of-time-award-compassionate-data-driven-tutors-for-problem-solving-and-persistence-tiffany-barnes}{%
+\subsubsection{Test of Time Award: Compassionate, Data-Driven Tutors for
+Problem Solving and Persistence (Tiffany
+Barnes)}\label{test-of-time-award-compassionate-data-driven-tutors-for-problem-solving-and-persistence-tiffany-barnes}}
+
+\emph{Abstract:} Determining how, when, and whether to provide
+personalized support is a well-known challenge called the assistance
+dilemma. A core problem in solving the assistance dilemma is the need to
+discover when students are unproductive so that the tutor can intervene.
+This is particularly challenging for open-ended domains, even those that
+are well-structured with defined principles and goals. In this talk, I
+will present a set of data-driven methods to classify, predict, and
+prevent unproductive problem-solving steps in the well-structured
+open-ended domains of logic and programming. Our approaches leverage and
+extend my work on the Hint Factory, a set of methods that to build
+data-driven intelligent tutor supports using prior student solution
+attempts. In logic, we devised a HelpNeed classification model that uses
+prior student data to determine when students are likely to be
+unproductive and need help learning optimal problem-solving strategies.
+In a controlled study, we found that students receiving proactive
+assistance on logic when we predicted HelpNeed were less likely to avoid
+hints during training, and produced significantly shorter, more optimal
+posttest solutions in less time. In a similar vein, we have devised a
+new data-driven method that uses student trace logs to identify
+struggling moments during a programming assignment and determine the
+appropriate time for an intervention. We validated our algorithm's
+classification of struggling and progressing moments with experts rating
+whether they believe an intervention is needed for a sample of 20\% of
+the dataset. The result shows that our automatic struggle detection
+method can accurately detect struggling students with less than 2
+minutes of work with 77\% accuracy. We further evaluated a sample of 86
+struggling moments, finding 6 reasons that human tutors gave for
+intervention from missing key components to needing confirmation and
+next steps. This research provides insight into the when and why for
+programming interventions. Finally, we explore the potential of what
+supports data-driven tutors can provide, from progress tracking to
+worked examples and encouraging messages, and their importance for
+compassionately promoting persistence in problem solving.
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\pdfbookmark{JEDM Presentations}{jedm}
+\phantomsection
+\addcontentsline{toc}{section}{JEDM Presentations}
+
+
+%\section*{Invited talks}
+
+\begin{center}
+  {\Large \bf JEDM Presentations}
+\end{center}
+
+\vspace*{0.5cm}
+%\hypertarget{jedm-presentations-1}{%
+%\subsection{JEDM Presentations}\label{jedm-presentations-1}}
+
+\hypertarget{empirical-evaluation-of-deep-learning-models-for-knowledge-tracing-of-hyperparameters-and-metrics-on-performance-and-replicability}{%
+\subsubsection{Empirical Evaluation of Deep Learning Models for
+Knowledge Tracing: Of Hyperparameters and Metrics on Performance and
+Replicability}\label{empirical-evaluation-of-deep-learning-models-for-knowledge-tracing-of-hyperparameters-and-metrics-on-performance-and-replicability}}
+
+\emph{Abstract:} New knowledge tracing models are continuously being
+proposed, even at a pace where state-of-the- art models cannot be
+compared with each other at the time of publication. This leads to a
+situation where ranking models is hard, and the underlying reasons of
+models' performance -- be it architectural choices, hyperparameter
+tuning, performance metrics, or data -- is often underexplored. In this
+work, we review and evaluate a body of deep learning knowledge tracing
+(DLKT) models with openly available and widely-used data sets, and with
+a novel data set of students learning to program. The evaluated
+knowledge tracing models include Vanilla-DKT, two Long Short-Term Memory
+Deep Knowledge Trac- ing (LSTM-DKT) variants, two Dynamic Key-Value
+Memory Network (DKVMN) variants, and Self- Attentive Knowledge Tracing
+(SAKT). As baselines, we evaluate simple non-learning models, logistic
+regression and Bayesian Knowledge Tracing (BKT). To evaluate how
+different aspects of DLKT models influence model performance, we test
+input and output layer variations found in the compared models that are
+independent of the main architectures. We study maximum attempt count
+options, including filtering out long attempt sequences, that have been
+implicitly and explicitly used in prior studies. We contrast the
+observed performance variations against variations from non-model
+properties such as randomness and hardware. Performance of models is
+assessed using multiple metrics, whereby we also contrast the im- pact
+of the choice of metric on model performance. The key contributions of
+this work are the following: Evidence that DLKT models generally
+outperform more traditional models, but not necessarily by much and not
+always; Evidence that even simple baselines with little to no predictive
+value may outperform DLKT models, especially in terms of accuracy --
+highlighting importance of selecting proper baselines for comparison;
+Disambiguation of properties that lead to better performance in DLKT
+models including metric choice, input and output layer variations,
+common hyperparameters, random seeding and hard- ware; Discussion of
+issues in replicability when evaluating DLKT models, including
+discrepancies in prior reported results and methodology. Model
+implementations, evaluation code, and data are published as a part of
+this work.
+
+\hypertarget{latent-skill-mining-and-labeling-from-courseware-content}{%
+\subsubsection{Latent Skill Mining and Labeling from Courseware
+Content}\label{latent-skill-mining-and-labeling-from-courseware-content}}
+
+\emph{Abstract:} A model that maps the requisite skills, or knowledge
+components, to the contents of an online course is necessary to
+implement many adaptive learning technologies. However, developing a
+skill model and tagging courseware contents with individual skills can
+be expensive and error prone. We propose a technology to automatically
+identify latent skills from instructional text on existing online
+courseware called SMART (\textbf{S}kill \textbf{M}odel mining with
+\textbf{A}utomated detection of \textbf{R}esemblance among
+\textbf{T}exts). SMART is capable of mining, labeling, and mapping
+skills without using an existing skill model or student learning (aka
+response) data. The goal of our proposed approach is to mine latent
+skills from assessment items included in existing courseware, provide
+discovered skills with human-friendly labels, and map didactic paragraph
+texts with skills. This way, mapping between assessment items and
+paragraph texts is formed. In doing so, automated skill models produced
+by SMART will reduce the workload of courseware developers while
+enabling adaptive online content at the launch of the course. In our
+evaluation study, we applied SMART to two existing authentic online
+courses. We then compared machine-generated skill models and
+human-crafted skill models in terms of the accuracy of predicting
+students' learning. We also evaluated the similarity between
+machine-generated and human-crafted skill models. The results show that
+student models based on SMART-generated skill models were equally
+predictive of students' learning as those based on human-crafted skill
+models -- as validated on two OLI courses. Also, SMART can generate
+skill models that are highly similar to human-crafted models as
+evidenced by the normalized mutual information (NMI) values.
 
 
 % \pdfbookmark{Full Papers}{papers}
